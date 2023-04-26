@@ -1,9 +1,13 @@
+import java.util.Scanner;
+
+// extendendo a classe Thread
 class numeropi extends Thread{
     private final int n; // numero de termos
-    private final int nThreads; //10 threads como exemplo
-    private final int threadID; // id das threads
-    private double total = 0;
+    private final int nThreads; // número de threads
+    private final int threadID; // id da thread
+    private double total = 0; // valor calculado de cada thread
 
+    // construtor
     public numeropi(int nTermos, int nThreads, int idThreads){
         this.n = nTermos;
         this.nThreads = nThreads;
@@ -16,41 +20,58 @@ class numeropi extends Thread{
         }
     }
 
+    // retorna o valor que a thread calculou
     public double getTotal(){
         return this.total;
     }
 }
 
 class calc_pi{
-    static final int N = 100;
-    static public int n = 1000000;
-    static double soma = 0;
-    static double erro;
-    static double pi = Math.PI;
+    static public int N; // número de threads
+    static public int n; // número de termos
+    static double soma = 0; // soma dos valores calculados pelas threads
+    static double erro; // erro da aproximação
+    static double pi = Math.PI; // valor de pi do Java
 
     public static void main(String[] args) {
+        
+        // pegando os dados do teclado (n threads, n termos)
+        Scanner leitura = new Scanner(System.in);
+        System.out.println("Digite o número de Threads:");
+        N = leitura.nextInt();
+        System.out.println("Digite o número de termos para calcular PI:");
+        n = leitura.nextInt();
+
+        // vetor de threads
         Thread[] threads = new Thread[N];
 
+        // criando as threads e armazenando no vetor de threads
         for(int i = 0; i < threads.length; i++){
             threads[i] = new numeropi(n, N, i);
         }
 
+        // iniciando as threads
         for(int i = 0; i < threads.length; i++){
             threads[i].start();
         }
 
+        // esperando todas as threads terminarem
         for (int i = 0; i < threads.length; i++) {
             try { threads[i].join(); }
             catch (InterruptedException e) { return; }
         }
 
+        // somando todos os totais calculados pelas threads
         for(int i = 0; i < threads.length; i++){
             numeropi t = (numeropi) threads[i];
             soma += t.getTotal();
         }
+        
+        // soma total e erro
         soma = soma*4;
         erro = Math.abs(pi - soma);
-
+        
+        // prints
         System.out.println("PI original: " + pi);
         System.out.println("Aproximacao: " + soma);
         System.out.println("Erro:" + erro);

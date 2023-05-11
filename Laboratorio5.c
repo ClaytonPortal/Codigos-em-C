@@ -59,7 +59,7 @@ void *senteSe (void *t) {
     pthread_exit(NULL);
 }
 
-// Thread até Mais
+// Thread atéMais
 void *ateMais (void *t) {
     int idThread = (int) t;
 

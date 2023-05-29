@@ -134,6 +134,5 @@ int main(void) {
   // }
 
   pthread_exit(NULL);
-  printf("Finalizando as threads...\n");
   return 0;
 }

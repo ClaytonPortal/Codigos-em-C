@@ -125,7 +125,7 @@ int main(void) {
 
   for (i = 0; i < C; i++) {
     ids[i + P] = i + 1;
-    printf("Criando a threads consumidora [%d]\n\n", i + 1);
+    printf("Criando a thread consumidora [%d]\n\n", i + 1);
     pthread_create(&threads[i + P], NULL, consumidor, (void *)&ids[i + P]);
   }
 

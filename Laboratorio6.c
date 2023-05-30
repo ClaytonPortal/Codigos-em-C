@@ -129,10 +129,6 @@ int main(void) {
     pthread_create(&threads[i + P], NULL, consumidor, (void *)&ids[i + P]);
   }
 
-  // for (i = 0; i < P + C; i++) {
-  //   pthread_join(threads[i], NULL);
-  // }
-
   pthread_exit(NULL);
   return 0;
 }

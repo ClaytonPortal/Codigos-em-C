@@ -110,6 +110,9 @@ int main(void) {
   int i;
   pthread_t threads[P + C];
   int ids[P + C];
+  
+  printf("Inicializando o BUFFER\n\n");
+	inicializaBUFFER(B);
 
   printf("Iniciando os semáforos\n\n");
   sem_init(&mutexCons, 0, 1);
